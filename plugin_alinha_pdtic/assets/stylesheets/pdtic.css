@@ -1,0 +1,19 @@
+.form-group label{
+    width: 15%;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.form-group input, textarea{
+    width: 80%;
+}
+
+.form-group{
+   padding: 5px;
+
+}
+
+.form-inline{
+    padding-right: 4%;
+    text-align: right; 
+} 

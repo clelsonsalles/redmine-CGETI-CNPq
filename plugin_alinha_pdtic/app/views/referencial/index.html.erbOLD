@@ -1,0 +1,31 @@
+
+<h2>Referenciais Estrategicos</h2>
+
+
+  <table>
+    <tr>
+      <td>Identificador</td>
+      <td>Tipo</td>
+      <td>Titulo</td>
+      <td>Descricao</td>
+      <td>Acoes</td>
+    </tr>
+<% @referencias.each do |referencial| %>
+  
+    <tr>
+      <td><%= referencial.identificador %></td>
+      <td><%= referencial.tipo %></td>
+      <td><%= referencial.titulo %></td>
+      <td><%= referencial.descricao %></td>
+      <td>
+      <%= button_to "Editar", edit_referencial_path(referencial), method: :get %>
+      <%= button_to "Remover", referencial, 
+                        method: :delete, 
+                        class: "btn btn-danger", 
+                        data: { confirm: "Tem certeza que deseja remover #{referencial.titulo} ?" } %>
+      </td>
+    </tr>
+<% end %>
+  </table>
+
+<%= link_to "Criar novo Referencial", new_referencial_path %>

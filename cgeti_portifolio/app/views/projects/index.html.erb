@@ -1,0 +1,70 @@
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+<div class="contextual">
+  <%= form_tag({}, :method => :get) do %>
+    <label for="closed">
+      <%= check_box_tag 'closed', 1, params[:closed], :onchange => "this.form.submit();" %>
+      <%= l(:label_show_closed_projects) %>
+    </label>
+  <% end %>
+  <%= render_project_action_links %>
+</div>
+
+<h2>Portif&#x00F3;lio de Projetos CGETI</h2>
+
+
+<div id="accordion">
+  <h3>Projetos sob Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
+  <div>
+    <% proj = Project.find("projetos-sob-gestao-da-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+  <h3>Projetos em Inicia&#x00E7;&#x00E3;o </h3>
+  <div>
+    <% proj = Project.find("projetos-em-iniciacao") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+  <h3>Monitoramento e Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
+  <div>
+    <% proj = Project.find("monitoramento-e-gestao-de-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+<span class="icon icon-fav my-project"><%= l(:label_my_projects) %></span>
+</p>
+<% end %>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>

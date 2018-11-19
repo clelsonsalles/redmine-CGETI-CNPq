@@ -1,0 +1,24 @@
+<%= form_for @referencial, url: referencial_index_path do |f| %>
+
+    <div class="form-group">
+        <%= f.label :identificador %>
+        <%= f.text_field :identificador, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :tipo %>
+        <%= f.text_field :tipo, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :titulo %>
+        <%= f.text_field :titulo, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :descricao %>
+        <%= f.text_area :descricao, rows: 4, class: "form-control" %>
+    </div>
+
+    <div class="form-inline">
+        <%= f.submit "Criar Referencial Estrategico", class: "btn btn-primary" %>
+    </div>
+<% end %>
