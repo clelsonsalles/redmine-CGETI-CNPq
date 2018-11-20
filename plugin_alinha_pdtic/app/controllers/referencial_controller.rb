@@ -10,6 +10,8 @@ class ReferencialController < ApplicationController
   def update
     valores = params.require(:referencial).permit(:identificador, :tipo, :titulo, :descricao)
     referencial = Referencial.find(params[:id])
+    @referencialPai = Referencial.find(params[:page][:id_pai])
+    referencial.principal = @referencialPai
     referencial.update(valores)
     redirect_to referenciais_url    
   end

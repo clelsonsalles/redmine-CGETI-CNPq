@@ -16,4 +16,10 @@
 .form-inline{
     padding-right: 4%;
     text-align: right; 
-} 
+}
+/*
+.ui-accordion .ui-accordion-content {
+    padding: 0px 25px;
+    border-top: 0;
+    overflow: auto;
+} */

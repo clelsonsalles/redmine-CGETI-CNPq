@@ -1,3 +1,4 @@
+# encoding: UTF-8
 
 <h3>Criar novo Referencial<h3>
 <h4><%= @referencialPai.titulo %></h4>
@@ -13,21 +14,18 @@
         <%= f.text_field :tipo, class: "form-control" %>
     </div>
     <div class="form-group">
-        <%= f.label :titulo %>
+        <%= f.label :titulo, 'Título' %>
         <%= f.text_field :titulo, class: "form-control" %>
     </div>
 
     <div class="form-group">
-        <%= f.label :descricao %>
+        <%= f.label :descricao, 'Descrição' %>
         <%= f.text_area :descricao, rows: 4, class: "form-control" %>
     </div>
 
     <div class="form-inline">
-        <%= f.submit "Criar Referencial Estrategico", class: "btn btn-primary" %>
+        <%= f.submit "Criar Referencial Tático", class: "btn btn-primary" %>
     </div>
 <% end %>
 
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'pdtic', :plugin => 'plugin_alinha_pdtic' %>
-<% end %>
+<%= render "peReferencial" %>

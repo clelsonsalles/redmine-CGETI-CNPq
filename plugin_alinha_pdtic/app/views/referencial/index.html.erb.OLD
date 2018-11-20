@@ -1,0 +1,82 @@
+
+<h1> PDTIC 2017/2020</h1>
+
+<h2>Referenciais Taticos</h2>
+
+<div id="accordion" >
+<% @referencias.each do |referencial| %>
+  
+  <h3><%= referencial.identificador %> 
+  </h3>
+  <div>    
+      <div><%= referencial.tipo %>
+         <div style='float: right'>
+             <div style='padding-left: 10px; float: left;'>
+                <%= button_to "Editar", edit_referencial_path(referencial), method: :get, class: "icon icon-edit" %>
+             </div>
+             <div style='padding-left: 10px; float: left;'>
+                 <%= button_to "Remover", referencial,
+                        method: :delete,
+                        class: "icon icon-del",
+                        data: { confirm: "Tem certeza que deseja remover #{referencial.titulo} ?" } %>
+             </div>
+
+              <div style='padding-left: 10px; float: left;'> 
+                  <%= button_to "Adicionar Filho", novo_filho_path(referencial), method: :get, class: "icon icon-add" %> 
+              </div>
+         </div>
+         <div style='clear: both'></div>
+      </div>
+
+      <div style='padding-top: 10px'>
+         <div id='accordion_<%= referencial.id %>'>
+         <% Referencial.where(principal_id: referencial.id).find_each do |filho| %>
+
+               <h3> <%= filho.identificador %></h3>
+               <div>
+                  <div><%= filho.tipo %>
+                     <div style='float: right'>
+                         <div style='padding-left: 10px; float: left;'>
+                            <%= button_to "Editar", edit_referencial_path(filho), method: :get, class: "icon icon-edit" %>
+                         </div>
+                         <div style='padding-left: 10px; float: left;'>
+                             <%= button_to "Remover", filho,
+                                method: :delete,
+                                class: "icon icon-del",
+                                data: { confirm: "Tem certeza que deseja remover #{filho.titulo} ?" } %>
+                         </div>
+
+                         <div style='padding-left: 10px; float: left;'>
+                           <%= button_to "Adicionar Filho", novo_filho_path(filho), method: :get, class: "icon icon-add" %>
+                         </div>
+                     </div>
+                     <div style='clear: both'></div>
+                  </div>
+               </div>
+
+         <% end %>
+         </div>
+
+  <script>
+  $( function() {
+    $( "#accordion_<%= referencial.id %>" ).accordion({heightStyle: "content"});
+  } );
+  </script>
+
+      </div>
+
+
+  </div>
+<% end %>
+</div>
+<div style='padding: 15px; float: right'>
+   <%= link_to "Criar novo Referencial", new_referencial_path, class: "icon icon-add" %>
+</div>
+<div style='clear: both'></div>
+
+<script>
+  $( function() {
+    $( ".selector" ).accordion({ autoHeight: false });
+  } );
+</script>
+
