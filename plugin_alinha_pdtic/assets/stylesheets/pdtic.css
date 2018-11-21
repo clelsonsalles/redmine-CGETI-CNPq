@@ -14,9 +14,22 @@
 }
 
 .form-inline{
-    padding-right: 4%;
+    padding: 4% 4% 0 0;
     text-align: right; 
 }
+
+.float-left{
+   float: left;
+}
+
+.float-right{
+   float: right;
+}
+
+.small-text{
+   font-size: small;
+}
+
 /*
 .ui-accordion .ui-accordion-content {
     padding: 0px 25px;

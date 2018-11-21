@@ -7,7 +7,7 @@
 
     <div class="form-group">
         <%= label :id_pai, 'Referencial Pai' %>
-        <%= collection_select(:page, :id_pai, Referencial.all, :id, :titulo) %>
+        <%= collection_select(:page, :id_pai, Referencial.all, :id, :titulo, @referencial.principal ? {:selected => @referencial.principal.id} : {}) %>
     </div>
 
     <div class="form-group">
@@ -29,7 +29,8 @@
     </div>
 
     <div class="form-inline">
-        <%= f.submit "Editar Referencial Tático", class: "btn btn-primary" %>
+        <%= link_to "Cancelar", referenciais_path, class: "icon icon-cancel float-left small-text" %>
+        <%= f.submit "Editar Referencial Tático", class "icon icon-edit float-right" %>
     </div>
 <% end %>
 
