@@ -1,3 +1,4 @@
+
 Redmine::Plugin.register :plugin_alinha_pdtic do
   name 'Alinhamento PDTIC'
   author 'Clelson Salles Rodrigues'
@@ -8,4 +9,13 @@ Redmine::Plugin.register :plugin_alinha_pdtic do
   requires_redmine :version_or_higher => '2.0.0'
 
   menu :top_menu, :pdtic, { :controller => 'referencial', :action => 'index' }, :caption => 'PDTIC', :before => :projects
+
+  project_module :alinhamento_PDTIC do
+     permission :gerenciar_alinhamento_PDTIC, {
+        :alinhamento => [:new, :create, :destroy, :edit, :update]
+     }
+  end
+
 end
+
+require_dependency 'plugin_alinha_pdtic/hooks'
