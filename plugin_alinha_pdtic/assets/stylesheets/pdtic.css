@@ -30,6 +30,10 @@
    font-size: small;
 }
 
+.modal{
+   font-size: 0.7em;
+}
+
 /*
 .ui-accordion .ui-accordion-content {
     padding: 0px 25px;
