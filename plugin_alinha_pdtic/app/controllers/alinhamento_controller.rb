@@ -25,8 +25,15 @@ class AlinhamentoController < ApplicationController
   end
 
   def create
+    referencial = Referencial.find(params[:alinhamento][:id_referencial])
+    projeto = Project.find(params[:alinhamento][:id_projeto])
+
     valores = params.require(:alinhamento).permit(:colaboracao, :tipo, :descricao)
     alinhamento = Alinhamento.create(valores)
+    alinhamento.referencial = referencial
+    alinhamento.project = projeto
+    alinhamento.save()
+
     redirect_to alinhamentos_url
   end
 

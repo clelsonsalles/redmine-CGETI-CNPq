@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
     resources :alinhamento, only: [:new, :create, :destroy, :edit, :update]
     get 'alinhamentos', :to => 'alinhamento#list'
+    post 'novo_alinhamento_create', :to => 'alinhamento#novo_alinhamento_create'
+
 end

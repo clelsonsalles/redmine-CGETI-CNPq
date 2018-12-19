@@ -1,5 +1,5 @@
 .form-group label{
-    width: 15%;
+    min-width: 18%;
     display: inline-block;
     font-weight: bold;
 }
@@ -31,8 +31,8 @@
 }
 
 .modal{
-   font-size: 0.7em;
-   min-width: 550px;
+   font-size: 0.85em;
+   min-width: 650px;
 }
 
 /*
