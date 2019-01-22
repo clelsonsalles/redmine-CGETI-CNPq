@@ -1,0 +1,7 @@
+# Plugin's routes
+# See: http://guides.rubyonrails.org/routing.html
+
+Rails.application.routes.draw do
+    resources :referencial, only: [:new, :create, :destroy]
+    get 'referenciais', :to => 'referencial#index'
+end

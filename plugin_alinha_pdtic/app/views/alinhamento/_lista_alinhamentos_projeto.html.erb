@@ -1,0 +1,17 @@
+# encoding: UTF-8
+
+  <div id="alinhamentos" >
+  <h2>Lista de alinhamentos</h2>
+  <% alinhamentos = Alinhamento.where(project: @project).find_each %>
+  <% alinhamentos.each do |alinhamento| %>
+
+    <h2><%= alinhamento.referencial.titulo %></h2>
+    <p><strong>Tipo: </strong><%= alinhamento.tipo %></p>
+    <p><strong>Colaboração: </strong><%= alinhamento.colaboracao %></p>
+    <p><strong>Descrição: </strong><%= alinhamento.descricao %></p>
+    <p><strong>Projeto: </strong><%= alinhamento.project.name %></p>
+    <div style='display: none'>
+       <%= render "alinhamento/referencial_alinhamento", referencial: alinhamento.referencial %>
+    </div>
+  <% end %>
+  </div>

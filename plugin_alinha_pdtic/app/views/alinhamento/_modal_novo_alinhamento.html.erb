@@ -1,0 +1,30 @@
+# encoding: UTF-8
+
+<!-- Modal HTML para inclusao de novos Alinhamentos -->
+<div id="modal-Alinhamento" class="modal"  title='Incluir Alinhamento'>
+  <div class='ui-icon ui-icon-shuffle' style='float: left; position: relative; top: 5px;'> </div>
+  <h1>Incluir novo Alinhamento ao PDTIC 2017/2020</h1>
+  <h2><%= @project.name %></h2>
+
+  <div style='clear: both;'></div>
+
+  <div id="accordion" >
+  <% referencias.each do |referencial| %>
+
+    <h3><%= referencial.identificador %>
+    </h3>
+    <div>
+       <%= render "alinhamento/referencial_alinhamento", referencial: referencial %>
+    </div>
+  <% end %>
+  </div>
+
+ <%= link_to "Fechar", "#", class: "", id: "fechar-modal-Alinhamento" %>
+</div>
+
+<script>
+  $( function() {
+    $( ".selector" ).accordion({ autoHeight: false });
+  } );
+</script>
+

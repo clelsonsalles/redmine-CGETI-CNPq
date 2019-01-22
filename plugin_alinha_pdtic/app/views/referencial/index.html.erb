@@ -1,0 +1,32 @@
+# encoding: UTF-8
+
+<h1> PDTIC 2017/2020</h1>
+
+<h2>Referenciais Táticos</h2>
+
+<%= render "link_novo_referencial" %>
+
+<div id="accordion" >
+<% @referencias.each do |referencial| %>
+  
+  <h3><%= referencial.identificador %> 
+  </h3>
+  <div>    
+
+      <%= render "referencial", referencial: referencial %>
+
+  </div>
+<% end %>
+</div>
+
+<%= render "link_novo_referencial" %>
+
+
+<script>
+  $( function() {
+    $( ".selector" ).accordion({ autoHeight: false });
+  } );
+</script>
+
+<%= render "peReferencial" %>
+
