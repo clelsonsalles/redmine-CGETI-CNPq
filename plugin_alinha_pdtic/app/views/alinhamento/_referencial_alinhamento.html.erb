@@ -12,7 +12,11 @@
          <div style='float: left; width: 98%'>
                   <div id='modal-incluiAlinhamento-<%= referencial.id %>' class='modal-incluiAlinhamento'  style='display: none' >
                   <% novoAlinhamento = Alinhamento.new %>
+<<<<<<< HEAD
                   <%= form_for novoAlinhamento, url: alinhamento_index_path do |a| %>
+=======
+                  <%= form_for novoAlinhamento, url: referencial_index_path do |a| %>
+>>>>>>> 8be061619f1fd33593e18ecfdcb3c8e22b81f2c6
                       <%= a.hidden_field :id_referencial, :value => referencial.id %>
                       <%= a.hidden_field :id_projeto, :value => @project.id %>
                       <div class="form-group">
