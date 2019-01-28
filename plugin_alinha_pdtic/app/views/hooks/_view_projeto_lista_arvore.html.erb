@@ -1,0 +1,9 @@
+
+<% if @project.custom_field_value(2).any? and  @project.custom_field_value(2)[0] == 'Grupo de Projetos' %> 
+    <h2>Hierarquia do Projeto</h2>   
+
+    <div id="projects-index" class='projects-hierarquia'>
+          <%= render_project_hierarchy(@project.hierarchy) %>
+    </div>
+
+<% end %>

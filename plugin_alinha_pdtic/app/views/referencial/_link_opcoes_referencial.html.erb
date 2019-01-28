@@ -1,0 +1,24 @@
+
+      <% if User.current.admin? %>
+      <div style='font-size: .9em; position: relative; top: -1em; left: -2.2em'>
+         <div style='float: right;'><strong>Tipo: </strong>
+             <%= referencial.tipo %>
+         </div>
+         <div style='float: left'>
+             <div style='padding-left: 10px; float: left;'>
+                <%= link_to "Editar", edit_referencial_path(referencial), method: :get, class: "icon icon-edit" %>
+             </div>
+             <div style='padding-left: 10px; float: left;'>
+                 <%= link_to "Remover", referencial,
+                        method: :delete,
+                        class: "icon icon-del",
+                        data: { confirm: "Tem certeza que deseja remover #{referencial.titulo} ?" } %>
+             </div>
+
+              <div style='padding-left: 10px; float: left;'>
+                  <%= link_to "Adicionar Filho", novo_filho_path(referencial), method: :get, class: "icon icon-add" %>
+              </div>
+         </div>
+         <div style='clear: both'></div>
+      </div>
+      <% end %>

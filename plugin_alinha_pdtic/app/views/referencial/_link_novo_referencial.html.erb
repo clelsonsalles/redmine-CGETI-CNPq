@@ -1,5 +1,10 @@
+
+<% if User.current.admin? %>
+
 <div style='padding: 3px; float: right'>
    <%= link_to "Criar novo Referencial", new_referencial_path, class: "icon icon-add" %>
 </div>
 <div style='clear: both'></div>
+
+<% end %>
 

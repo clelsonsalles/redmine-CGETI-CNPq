@@ -1,22 +1,77 @@
+# encoding: utf-8
+
+
 <% content_for :header_tags do %>
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
 <% end %>
 
-<div class="contextual">
-  <%= form_tag({}, :method => :get) do %>
-    <label for="closed">
-      <%= check_box_tag 'closed', 1, params[:closed], :onchange => "this.form.submit();" %>
-      <%= l(:label_show_closed_projects) %>
-    </label>
-  <% end %>
-  <%= render_project_action_links %>
+
+
+<div style='float: left; width: 45%'>
+  <%= image_tag('PortifolioProjetos-001.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 95%; height: 95%;') %>
+<div>
+<div style='float: left;'>
+  <a href='/projects/projetos-sob-gestao-da-tic'>  <%= image_tag('PortifolioProjetos-002.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
+</div>
+<div style='float: left;'>
+  <a href='/projects/monitoramento-e-gestao-de-tic'> <%= image_tag('PortifolioProjetos-003.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
+</div>
+<div style='float: left;'>
+  <a href='/projects/projetos-em-iniciacao'> <%= image_tag('PortifolioProjetos-004.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
+</div>
+</div>
 </div>
 
-<h2>Portif&#x00F3;lio de Projetos CGETI</h2>
+<div style='float: left; width: 55%'>
+   <h2>Portifólio de Projetos da CGETI/CNPq</h2>
+
+
+	<p>Um <strong>portifólio</strong> é uma coleção de projetos, programas e outros trabalhos, em andamento ou planejados, estando eles relacionados de alguma forma ou não, que estão agrupados com o propósito de facilitar o gerenciamento efetivo das ações para atender aos objetivos estratégicos organizacionais. Enquanto os projetos e programas são temporários, os portifólios são contínuos.</p>
+
+
+	<p>O <strong>Gerenciamento de Portifólios de Projetos</strong> na CGETI refere-se a gestão centralizada de um ou mais portifólios, que inclui identificação, priorização, autorização, monitoramento e controle de projetos, programas e outros trabalhos relacionados. <br />O <strong>Gerenciamento de Portifólios de Projetos</strong> na CGETI se concentra em garantir que os projetos e programas sejam analisados a fim de priorizar a alocação de recursos e que sejam consistentes e integrados às estratégias organizacionais.</p>
+
+
+	<p>Considerando os diversos níveis a que o gerenciamento de portifólio pode ser aplicado em uma organização, o <strong>Gerenciamento de Portifólios de Projetos</strong> na CGETI propõe uma classificação sob um olhar departamental, voltado para a área de <strong>Tecnologia da Informação e Comunicações - TIC</strong> do CNPq, sendo assim classificada como um <strong>Portifólio de Projetos Departamental</strong> (segunda a classificação oferecida na "Metologia de Gerenciamento de Portifólio de Projetos do SISP").</p>
+
+
+<blockquote>
+<p>O <strong>Portifólio de Projetos CGETI</strong> foi organizado para apresentar seus componentes (projetos, programas, operações e outras ações ou trabalhos) em tt
+rês perspectivas ou agrupamentos:</p>
+	<ul>
+
+	<li><strong>Projetos de TIC</strong>
+	<ul>
+	<li>agrupa os projetos que estão sendo conduzidos pelo <strong>Processo de Gerenciamento de Projetos</strong> da área de TIC</li>
+	</ul>
+	</li>
+
+	<li><strong>Monitoramento e Gestão</strong>
+	<ul>
+	<li>grupo de projetos, operações ou ações relacionados às atividades de monitoramento, planejamento e gestão de TIC</li>
+	</ul></li>
+
+        <li><strong>Projetos Candidatos</strong>
+        <ul>
+
+<li>apresenta um agrupamento de ações ou projetos que podem ser iniciados ou que são candidatos a se submeterem à <strong>Fase de Iniciação do Processo de Gestão de Projetos</strong></li>       
+ 
+        </ul>
+        </li>
+
+	</ul>
+
+</blockquote>
+</div>
+<div style='clear: both; padding: 30px'></div>
+
+
+
+<h2>Lista de Projetos do Portif&#x00F3;lio de Projetos CGETI/CNPq</h2>
 
 
 <div id="accordion">
-  <h3>Projetos sob Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
+  <h3>Projetos de TIC</h3>
   <div>
     <% proj = Project.find("projetos-sob-gestao-da-tic") %>
     <%= proj.description %>
@@ -29,19 +84,7 @@
     <% end %>
     </div>
   </div>
-  <h3>Projetos em Inicia&#x00E7;&#x00E3;o </h3>
-  <div>
-    <% proj = Project.find("projetos-em-iniciacao") %>
-    <%= proj.description %>
-    <div id="projects-index">
-    <% parents = proj.descendants  %>
-    <% for proInterno in parents %>
-       <% if(proInterno.parent_id == proj.id) %>
-          <%= render_project_hierarchy(proInterno.hierarchy) %>
-       <% end %>
-    <% end %>
-    </div>
-  </div>
+
   <h3>Monitoramento e Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
   <div>
     <% proj = Project.find("monitoramento-e-gestao-de-tic") %>
@@ -55,6 +98,21 @@
     <% end %>
     </div>
   </div>
+
+  <h3>Projetos Candidatos - em Inicia&#x00E7;&#x00E3;o </h3>
+  <div>
+    <% proj = Project.find("projetos-em-iniciacao") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
 </div>
 
 <% if User.current.logged? %>
