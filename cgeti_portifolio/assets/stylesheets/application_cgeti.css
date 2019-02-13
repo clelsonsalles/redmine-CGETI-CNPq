@@ -1,0 +1,30 @@
+#top-menu {background: #3e5b76; color: #fff; height:1.8em; font-size: 0.8em; padding: 2px 2px 0px 6px;}
+
+#header {min-height:3em;margin:0;background-color:#507aaa;color:#f8f8f8; padding: 4px 8px 20px 6px; position:relative;}
+
+#table.list td {text-align:center; vertical-align:middle; padding-right:10px;}
+table.list td {text-align:left; vertical-align:middle; padding-right:10px;}
+
+
+/* Alteracoes equipe CNPq (Clelson)*/
+ul.projects li {
+   list-style-type:none;
+   padding-bottom: 5px;
+}
+
+#projects-index {
+  column-count: auto;
+  column-width: unset;
+  -webkit-column-count: unset;
+  -webkit-column-width: unset;
+  -webkit-column-gap : unset;
+  -moz-column-count: unset;
+  -moz-column-width: unset;
+  -moz-column-gap : unset;
+}
+#projects-index ul.projects li.root>ul.projects { border-left: 3px solid #e0e0e0; padding-left:0.2em;}
+#projects-index ul.projects li.root {margin-bottom: 1em;}
+#projects-index ul.projects li.child {margin-top: 0.2em;}
+
+
+

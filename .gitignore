@@ -1,0 +1,4 @@
+# Configura o git para ignorar as pastas de plugins de outros desenvolvedores fora da CGETI
+redmine_custom_reports/
+redmine_workflow_enhancements/
+scrum/
