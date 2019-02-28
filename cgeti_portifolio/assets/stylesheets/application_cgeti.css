@@ -29,5 +29,5 @@ ul.projects li {
 .ativados {display: block}
 .ativados .closed{display: none}
 
-.desativados .leaf{display: none}
+.desativados .child{display: none}
 .desativados .closed{display: block}
