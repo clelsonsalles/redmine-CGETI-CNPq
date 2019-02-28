@@ -111,9 +111,18 @@
   <% if @subprojects.any? %>
   <div class="projects box">
     <h3 class="icon icon-projects"><%=l(:label_subproject_plural)%></h3>
-  <div class="subprojetos">
-    <%= @subprojects.collect{|p| link_to p, project_path(p), :class => p.css_classes}.join("</div><div class='subprojetos'> ").html_safe %>
+  <div class="ativados">
+    <%= @subprojects.collect{|p| link_to p, project_path(p), :class => p.css_classes}.join("</div><div class='ativados'> ").html_safe %>
   </div>
+
+
+  <h3 class="icon icon-projects" style='color: #999; padding-top: 15px;'><%=l(:label_subproject_plural)%> fechados</h3>
+  <div class="subprojetos desativados">
+    <%= @subprojects.collect{|p| link_to p, project_path(p), :class => p.css_classes}.join("</div><div class='desativados'> ").html_safe %>
+  </div>
+
+
+
   </div>
   <% end %>
 

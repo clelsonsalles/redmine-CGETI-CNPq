@@ -26,5 +26,8 @@ ul.projects li {
 #projects-index ul.projects li.root {margin-bottom: 1em;}
 #projects-index ul.projects li.child {margin-top: 0.2em;}
 
+.ativados {display: block}
+.ativados .closed{display: none}
 
-
+.desativados .leaf{display: none}
+.desativados .closed{display: block}
