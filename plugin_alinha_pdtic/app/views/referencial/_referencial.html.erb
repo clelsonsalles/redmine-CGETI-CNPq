@@ -2,6 +2,9 @@
       <%= render "referencial/link_opcoes_referencial", referencial: referencial %>
 
       <div style='padding-top: 0px'>
+         <%= referencial.descricao %>
+
+         <% if Referencial.where(principal_id: referencial.id).any? %>
          <div id='accordion_<%= referencial.id %>'>
          <% Referencial.where(principal_id: referencial.id).find_each do |filho| %>
 
@@ -18,6 +21,7 @@
   } );
   </script>
 
+          <% end %>
       </div>
 
 

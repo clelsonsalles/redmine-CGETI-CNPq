@@ -5,10 +5,12 @@
 
 <%= form_for @referencial, url: referencial_path do |f| %>
 
+    <% if ! @referencial.principal.nil? %>
     <div class="form-group">
         <%= label :id_pai, 'Referencial Pai' %>
         <%= collection_select(:page, :id_pai, Referencial.all, :id, :titulo, @referencial.principal ? {:selected => @referencial.principal.id} : {}) %>
     </div>
+    <% end %>
 
     <div class="form-group">
         <%= f.label :identificador %>
