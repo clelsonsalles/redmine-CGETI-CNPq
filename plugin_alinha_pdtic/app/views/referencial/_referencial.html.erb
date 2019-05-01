@@ -2,7 +2,9 @@
       <%= render "referencial/link_opcoes_referencial", referencial: referencial %>
 
       <div style='padding-top: 0px'>
-         <%= referencial.descricao %>
+        <div class="wiki">
+          <%= textilizable referencial.descricao %>
+        </div>
 
          <% if Referencial.where(principal_id: referencial.id).any? %>
          <div id='accordion_<%= referencial.id %>'>

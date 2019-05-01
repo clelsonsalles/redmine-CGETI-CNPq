@@ -100,6 +100,9 @@
 <div class="splitcontentright">
   <%= render :partial => 'members_box' %>
 
+<!-- CGETI plugin: a lista de ultimas noticias dos projetos nao sera ordenada pela data de criacao, mas sim pela data de atualizacao - Clelson  -->
+  <% @news = @project.news.limit(5).includes(:author, :project).to_a %>
+
   <% if @news.any? && authorize_for('news', 'index') %>
   <div class="news box">
     <h3 class="icon icon-news"><%=l(:label_news_latest)%></h3>

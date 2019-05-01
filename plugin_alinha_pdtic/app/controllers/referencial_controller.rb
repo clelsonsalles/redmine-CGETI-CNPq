@@ -1,5 +1,18 @@
 class ReferencialController < ApplicationController
   def index
+    ref = Referencial.find(3)
+    ref.principal = nil
+    ref.save
+
+    ref = Referencial.find(4)
+    ref.principal = nil
+    ref.save
+
+    ref = Referencial.find(5)
+    ref.principal = nil
+    ref.save
+
+
     @referencias = Referencial.where(principal: nil)
   end
 
