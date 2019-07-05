@@ -1,0 +1,45 @@
+# encoding: UTF-8
+
+<h3>Informar dados da Vigência do Contrato</h3>
+
+
+<%= form_for @vigencica, url: vigencia_index_path do |f| %>
+<div style='float: left; width: 33%'>
+
+    <div class="form-group">
+        <%= f.label :periodoVigencia, 'Período devigência do contrato' %>
+        <%= f.text_field :periodoVigencia, class: "form-control" %>
+    </div>
+    <div style='float: left; width: 50%'>
+        <div class="form-group">
+            <%= f.label :inicioVigencia, 'Início da vigência' %>
+            <%= f.date_field :inicioVigencia, class: "form-control" %>
+        </div>
+    </div>
+    <div style='float: left; width: 50%'>
+        <div class="form-group">
+            <%= f.label :fimVigencia, 'Fim da vigência' %>
+            <%= f.date_field :fimVigencia, class: "form-control" %>
+        </div>
+    </div>
+    <div style='clear: both'></div>
+
+    <div class="form-group">
+        <%= f.label :origem, 'Origem da vigência do Contrato' %>
+        <%= f.text_field :origem, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :observacoes, 'Observações'  %>
+        <%= f.text_area :observacoes, rows: 4, class: "form-control" %>
+    </div>
+
+</div>
+
+<div style='clear: both'></div>
+
+    <div class="form-inline">
+        <%= link_to "Cancelar", referenciais_path, class: "icon icon-cancel float-left small-text" %>
+         <%= f.submit "Inserir dados da Vigência do Contrato", class:" icon icon-add float-right" %>
+    </div>
+<% end %>
+

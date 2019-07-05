@@ -1,39 +1,116 @@
 # encoding: UTF-8
 
 <h1>Plano Diretor de Tecnologia da Informação e Comunicações - PDTIC 2017/2020</h1>
-<div style="float: left; width: 48%">
-   <%= render "apresenta_PDTIC" %>
-</div>
-<div style="float: right; width: 48%">
 
-<h2>Referenciais Táticos</h2>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Sobre o PDTIC</a></li>
+    <li><a href="#tabs-2">Referenciais Táticos</a></li>
+    <li><a href="#tabs-3">Alinhamentos com o PDTIC</a></li>
+  </ul>
+  <div id="tabs-1">
 
-<%= render "link_novo_referencial" %>
-
-<div id="accordion" >
-<% @referencias.each do |referencial| %>
-  
-  <h3><%= referencial.identificador %> 
-  </h3>
-  <div>    
-
-      <%= render "referencial", referencial: referencial %>
-
+  <div style="" >
+     <%= render "apresenta_PDTIC" %>
   </div>
-<% end %>
-</div>
-
-<%= render "link_novo_referencial" %>
 
 </div>
-<div style="clear: both"></div>
+<div id="tabs-2">
 
-<script>
-  $( function() {
-    $( ".selector" ).accordion({ autoHeight: false });
-  } );
-</script>
+   <div style=" ">
+      <%= render "link_novo_referencial" %>
+
+      <div id="tabsRefer">
+        <ul>
+          <% @referencias.each_with_index do |referencial, index| %>
+             <li><a href='#tabsRefer-<%= index %>'><%= referencial.identificador %></a></li>
+          <% end %>
+        </ul>
+
+        <% @referencias.each_with_index do |referencial, index| %>
+          <div id="tabsRefer-<%= index %>">
+            <%= render "referencial", referencial: referencial %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= render "link_novo_referencial" %>
+   </div>
+   <div style="clear: both"></div>
+</div>
+
+<div id="tabs-3">
+<h3>Alinhamento com o PDTIC </h3>
+
+
+   <div id='graficosTipoProjetos'>
+ 
+   <script type="text/javascript">
+   google.charts.load('current', {packages: ['corechart', 'bar']});
+   google.charts.setOnLoadCallback(drawBasic);
+   function drawBasic() {
+      var data = google.visualization.arrayToDataTable([
+         ['Rerefencial Tático', 'Quantidade de Projetos']
+        <% @chartReferencial.each do |key, value| %>
+         ,['<%= key %>', <%= value %>]
+        <% end %>
+      ]);
+
+      var options = {
+        title: 'Quantidade de Projetos por Referencial Tático',
+        legend: 'none',
+        width: 1200,
+        height: 200,
+        hAxis: {
+          title: 'Referencial Tátcio'
+        },
+        vAxis: {
+          title: 'Quantidade de Projetos'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+         document.getElementById('graficosTipoProjetos'));
+
+      chart.draw(data, options);
+   }
+
+   </script>
+   </div>
+
+   <p>Lista de Projetos alinhados ao PDTIC</p>
+
+
+       <table class='list'>
+          <tr  style='border: 1px solid black'>
+             <td style='text-align: center; width: 40%'><strong>Referencial Tático</strong></td>
+             <td style='text-align: center; width: 60%'><strong>Projeto alinhado</strong></td>
+          <tr>
+
+    <% @referencias.each_with_index do |referencial, index| %>
+          <%= render "referencial_alinhamentos", referencial: referencial, nivel: 0 %>
+    <% end %>
+       </table>
+
+
+</div>
+
 
 <%= render "peReferencial" %>
+<div style='clear: both'></div>
+
+<script>
+   $( function() {
+     $( ".selector" ).accordion({ autoHeight: false });
+     $( "#tabs" ).tabs();
+     $( "#tabsRefer" ).tabs();
+   } );
+</script>
+<style>
+   .ui-widget-content {background: none; background-color: white;}
+   .ui-state-active {background: none; background-color: white;}
+   .ui-state-focus {margin: 0px !important; border: 0px !important;}
+</style>
 
 
+ 

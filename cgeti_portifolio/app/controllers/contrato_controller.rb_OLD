@@ -1,0 +1,46 @@
+class ContratoController < ApplicationController
+
+  helper :queries
+
+
+  def index
+     @project = Project.find(params[:project_id])
+  end
+
+  def edit
+    @contrato = Contrato.find(params[:id])
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  def new
+  end
+
+  def novo_filho
+  end
+
+  def create
+  end
+
+  def novo_filho_create
+  end
+
+  def list
+    @queryOS = IssueQuery.new(:name => "Lista de Ordens de Serviço - CONTRATO")
+    @queryOS.project = nil
+
+
+    @issuesOrdensServicos = find_issues_with_query(@queryOS)
+  end
+
+
+  def find_issues_with_query(query)
+    Issue.where(
+         query.statement)
+  end
+
+end

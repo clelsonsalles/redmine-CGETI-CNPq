@@ -1,0 +1,179 @@
+# encoding: utf-8
+
+
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+
+
+<div>
+
+  <div style='float:left; width: 50%; position: relative; top: -50px'>
+    <div class="wiki wiki-page">
+      <%= textilizable "{{include(administracao-do-redmine:Portifolio_imagem)}}" %>
+    </div>
+  </div>
+  <div style='float:left; width: 50%'>
+    <div class="wiki wiki-page">
+      <%= textilizable "{{include(administracao-do-redmine:Portifolio)}}" %>
+    </div>
+  </div>
+  <div style='clear: both'></div>
+
+
+</div>
+
+<% if User.current.logged? %>
+<div style='float: left; width:39%'>
+<div style='clear: both;' ></div>
+
+<h3>Projetos Associados ao usuario <b><%= User.current.name %></b>:</h3>
+<div id="projetos-index" style='padding-bottom: 45px'>
+    <% for project in @projects %>
+       <% if(User.current.member_of?(project)) %>
+          <div style='padding: 3px 15px'>
+          <%= link_to_project(project, {}, :class => "icon icon-fav my-project") %>
+          </div>
+       <% end %>
+    <% end %>
+</div>
+</div>
+<% end %>
+
+
+<div style='float: left; width: 45%'>
+
+<% projetosAtivos = Project.where(parent_id: nil) %>
+<% projetosTree = Project.where.not(parent_id: nil).order(parent_id: :asc) %>
+<% h = Hash.new %>
+
+
+<div>Project Tree</div>
+
+
+<% project_tree(projetosTree, :init_level => true) do |projeto, level| %>
+<div style='padding-left:<%=level *10 %>px;' >    <%= level %> - <%= link_to_project(projeto, {}, :class => "icon icon-fav my-project") %></div>
+
+<% end %>
+
+
+<div>Projetos Ativos:</div>
+
+<% for projetoAtivo in projetosAtivos %>
+    <%= link_to_project(projetoAtivo, {}, :class => "icon icon-fav my-project") %>
+
+
+   <% for valorCustomizado in projetoAtivo.custom_field_values %>
+
+      <% chave = valorCustomizado.custom_field.name %>
+      <% if chave == 'Tipo de Projeto' %>
+         <% for valor in valorCustomizado.value %>
+            <div> <%= valorCustomizado.custom_field.name %>: <%= valorCustomizado.value %> </div>
+
+            <% if h.has_key?(valor) %>
+               <% h[valor] = h[valor] + 1 %>
+            <% else %>
+               <% h[valor] = 1 %> 
+            <% end %>
+         <% end %>
+      <% end %>
+   <% end %>
+
+<% end %>
+<%= h %>
+
+</div>
+
+<div style='clear: both;' ></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<div>
+<h2>Lista de Projetos do Portif&#x00F3;lio de Projetos CGETI/CNPq</h2>
+
+
+<div id="accordion">
+  <h3>Projetos de TIC</h3>
+  <div>
+    <% proj = Project.find("projetos-sob-gestao-da-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+  <h3>Monitoramento e Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
+  <div>
+    <% proj = Project.find("monitoramento-e-gestao-de-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+  <h3>Projetos Candidatos - em Inicia&#x00E7;&#x00E3;o </h3>
+  <div>
+    <% proj = Project.find("projetos-em-iniciacao") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+-->
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+<span class="icon icon-fav my-project"><%= l(:label_my_projects) %></span>
+</p>
+<% end %>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>
+
+

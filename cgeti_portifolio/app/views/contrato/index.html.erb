@@ -1,0 +1,95 @@
+# encoding: UTF-8
+
+
+<h2>Dados do Contrato selecionado</h2>
+<table class='list'>
+  <tr>
+    <td><strong>Número do Contrato</strong></td>
+    <td colspan='3'><strong>Objeto do Contrato</strong></td>
+  </tr>
+  <tr>
+    <td> <%= @contrato.numero %> </td>
+    <td colspan='3'> <%= @contrato.objeto %> </td>
+  </tr>
+  <tr>
+    <td><strong>Empresa contratada</strong></td>
+    <td><strong>Nº SEI a contratação </strong></td>
+    <td><strong>Nº SEI do edital</strong></td>
+    <td><strong>Nº SEI do contrato</strong></td>
+  </tr>
+  <tr>
+    <td><%= @contrato.cnpjContratada %> - <%= @contrato.contratada %> </td>
+    <td><%= @contrato.SEIcontratacao %></td>
+    <td><%= @contrato.SEIedital %></td>
+    <td><%= @contrato.SEIcontrato %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><strong>Valor total do contrato</strong></td>
+    <td><strong>Prazo da contratação </strong></td>
+    <td><strong>Data da assinatura</strong></td>
+    <td><strong>Data da publicação</strong></td>
+  </tr>
+  <tr>
+    <td>R$ <%= @contrato.valorTotal %> </td>
+    <td><%= @contrato.prazoContratacao %></td>
+    <td><%= @contrato.dataAssinatura %></td>
+    <td><%= @contrato.dataPublicacao %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+</table>
+
+<div style='padding-left: 10px; float: right;'>
+   <%= link_to "Editar", edit_contrato_path(@contrato), method: :get, class: "icon icon-edit" %>
+</div>
+<div style='clear: both'></div>
+
+<h2>Ordens de Serviço do Contrato</h2>
+
+
+<h3>Lista de Ordens de Serviços do Contrato</h3>
+
+<% if !@issuesOS.empty? %>
+<table class="list issues odd-even <%= @queryOS.css_classes %>">
+  <thead>
+     <tr>
+        <th>ID da OS</td>
+        <th>Tipo da Tarefa</td>
+        <th>Ordem de Serviço</td>
+        <th style='text-align: right'>Valor da OS (R$)</td>
+     </tr>
+  </thead>
+  <tbody>
+
+<% valorTotalOS = 0.0 %>
+<% for iss in @issuesOS %>
+     <tr>
+        <td style='text-align: center'> <%= iss.id %> </td>
+        <td style='text-align: center'> <%= iss.tracker.name %> </td>
+        <td style='text-align: center'> <%= iss.subject %> </td>
+   <% for cfv in iss.custom_field_values %>
+      <% if  cfv.custom_field.id  == 25 %>
+        <td style='text-align: right'> <%= cfv.value %> </td>
+      <% end %>
+   <% end %>
+     </tr>
+<% end %>
+
+  </tbody>
+</table>
+
+
+   <div style='text-align: right'>Acesse o relatório com a
+<%= link_to @queryOS.name, project_issues_path(@project, :query_id => @queryOS.id), :title => 'Lista de OS' %>
+   </div>
+
+<% end %>
+
+

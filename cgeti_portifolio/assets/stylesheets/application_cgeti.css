@@ -4,6 +4,8 @@
 
 #table.list td {text-align:center; vertical-align:middle; padding-right:10px;}
 table.list td {text-align:left; vertical-align:middle; padding-right:10px;}
+.issue-report td {text-align:center !important;}
+.issue-report .name {text-align:left !important;}
 
 
 /* Alteracoes equipe CNPq (Clelson)*/
@@ -31,3 +33,52 @@ ul.projects li {
 
 .desativados .child{display: none}
 .desativados .closed{display: block}
+
+.form-group label{
+    min-width: 18%;
+    display: grid;
+    font-weight: bold;
+}
+
+.form-group input, textarea{
+    width: 95%;
+}
+
+.form-group{
+   padding: 5px;
+
+}
+
+.form-inline{
+    padding: 4% 4% 0 0;
+    text-align: right; 
+}
+
+.float-left{
+   float: left;
+}
+
+.float-right{
+   float: right;
+}
+
+.small-text{
+   font-size: small;
+}
+
+.modal{
+   font-size: 0.85em;
+   min-width: 650px;
+}
+
+
+.ui-accordion .ui-accordion-content {
+    border: 1px solid #628db6;
+    border-top-style: dashed;
+}
+
+.ui-accordion .ui-accordion-header-active {
+    border-bottom-style: none;
+}
+
+

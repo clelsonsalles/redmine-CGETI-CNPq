@@ -1,0 +1,149 @@
+# encoding: UTF-8
+
+<h1>Contratações de TIC/CNPq</h1>
+
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Dados dos Contratos</a></li>
+    <li><a href="#tabs-2">Lista de Ordens de Serviço</a></li>
+    <li><a href="#tabs-3">Gestão dos Contratos</a></li>
+  </ul>
+  <div id="tabs-1">
+
+<h2> Dados dos contratos cadastrados </h2>
+<div style='text-align: left; width: 34%; float: left;'>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Contrato', 'Valor contratado']
+            <% for contrato in @contratos %>
+               ,['<%= contrato.numero %>', <%= contrato.valorTotal %> ]
+            <% end %>
+        ]);
+
+        var options = {
+          title: 'Valores dos Contratos',
+          is3D: true,
+          legend: {position: 'bottom'}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+    <div id="piechart" style="width: 300; height: 400px;"></div>
+
+
+</div>
+<div style='width: 65%; float: left'>
+<table class='list'>
+  <thead>
+  <tr>
+    <th><strong>Projeto de Monitoramento</strong></td>
+    <th><strong>Número do Contrato</strong></td>
+    <th><strong>Empresa contratada</strong></td>
+    <th style='text-align: right'><strong>Valor total do contrato</strong></td>
+    <th style='text-align: right'><strong>Prazo da contratação </strong></t
+  </tr>
+  </thead>
+  <tbody>
+<% for contrato in @contratos %>
+  <tr>
+    <td>
+       <% if (!contrato.project.nil?) %>
+          <%= link_to_project(contrato.project, {}, :class => "icon icon-fav my-project") %>
+       <% end %>
+    </td>
+    <td> <%= contrato.numero %> </td>
+    <td><%= contrato.cnpjContratada %> - <%= contrato.contratada %> </td>
+    <td style='text-align: right'>R$ <%= contrato.valorTotal %> </td>
+    <td style='text-align: right'><%= contrato.prazoContratacao %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+</div>
+
+
+<div style='clear: both'>
+</div>
+
+
+  </div>
+  <div id="tabs-2">
+
+
+<h2>Lista de Ordens de Serviços cadastradas </h2>
+
+<table class="list issues odd-even <%= @queryOS.css_classes %>">
+  <thead>
+  </thead>
+  <tbody>
+  <% grouped_issue_list(@issuesOrdensServicos, @queryOS) do |issue, level, group_name, group_count, group_totals| -%>
+  <% if group_name %>
+    <% reset_cycle %>
+    <tr class="group open">
+      <td colspan="<%= @queryOS.inline_columns.size + 2 %>">
+        <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+        <span class="name"><%= group_name %></span> <span class="badge badge-count count"><%= group_count %></span> <span class="totals"><%= group_totals %></span>
+        <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}",
+                             "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+      </td>
+    </tr>
+  <% end %>
+  <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+    <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
+    <% @queryOS.inline_columns.each do |column| %>
+    <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
+    <% end %>
+  </tr>
+  <% end %>
+
+
+
+  </tbody>
+</table>
+
+  </div>
+
+
+  <div id="tabs-3">
+
+<div>
+
+  <div class="wiki wiki-page">
+    <%= textilizable @wikiContratoString %>
+  </div>
+  <div style='clear: both'></div>
+
+</div>
+
+
+
+  </div>
+
+</div>
+
+<div style='clear: both'></div>
+
+
+
+  <script>
+     $( function() {
+       $( "#tabs" ).tabs();
+     } );
+  </script>
+  <style>
+     .ui-widget-content {background: none; background-color: white;}
+     .ui-state-active {background: none; background-color: white;}
+     .ui-state-focus {margin: 0px !important; border: 0px !important;}
+  </style>
+
+

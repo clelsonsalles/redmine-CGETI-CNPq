@@ -1,0 +1,19 @@
+# encoding: UTF-8
+
+<h1>Informacoes sobre Contratacoes de TIC/CNPq</h1>
+
+<% for issueOS in @issuesOrdensServicos %>
+  <div class='ordensServico, <%= issueOS.css_classes %> '>
+    <% @queryOS.inline_columns.each do |column| %>
+      <%= content_tag('div', column_content(column, issueOS), :class => column.css_classes) %>
+    <% end %>
+  </div><div style='clear: both'></div>
+<% end %>
+
+
+<style>
+.ordensServico div{
+   float: left;
+}
+
+</style>

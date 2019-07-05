@@ -1,0 +1,15 @@
+# encoding: UTF-8
+
+<h2>Ordens de Serviço do Contrato</h2>
+
+<% for issueOS in @project.issues %>
+  <div><%= issueOS.id %></div>
+
+<% end %>
+
+
+<% for query in @queryOS %>
+   <div>Acesse a consulta com  
+<%= link_to query.name, project_issues_path(@project, :query_id => query.id), :title => 'Lista de OS' %>
+   </div>
+<% end %>

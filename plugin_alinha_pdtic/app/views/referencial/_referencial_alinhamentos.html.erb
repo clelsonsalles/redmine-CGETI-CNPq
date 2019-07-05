@@ -1,0 +1,26 @@
+
+           <tr style='border: 1px solid black'>
+               <td>
+                  <% if nivel == 0 %>
+                     <p style='padding-left: <%= nivel %>px; font-weight: bold;'><%= referencial.identificador %></p></td>
+                  <% else %>
+                     <p style='padding-left: <%= nivel %>px;'><%= referencial.identificador %></p></td>
+                  <% end %>
+               <td>
+ 
+          <% referencial.alinhamentos.each_with_index do |alinhamento, indexAlinhamento| %>
+              <div style='padding: 3px 15px'>
+                 <%= link_to_project(alinhamento.project, {}, :class => "icon icon-changeset") %>
+              </div>
+          <% end %>
+               </td>
+           </tr>
+
+
+         <% if Referencial.where(principal_id: referencial.id).any? %>
+            <% Referencial.where(principal_id: referencial.id).find_each do |filho| %>
+               <%= render "referencial_alinhamentos", referencial: filho, nivel: (nivel + 10) %>
+            <% end %>
+         <% end %>
+
+

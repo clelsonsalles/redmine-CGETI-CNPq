@@ -1,17 +1,46 @@
 # encoding: UTF-8
 
   <div id="alinhamentos" >
-  <h2>Lista de alinhamentos</h2>
+  <h3>Lista de alinhamentos</h3>
   <% alinhamentos = Alinhamento.where(project: @project).find_each %>
-  <% alinhamentos.each do |alinhamento| %>
 
-    <h2><%= alinhamento.referencial.titulo %></h2>
-    <p><strong>Tipo: </strong><%= alinhamento.tipo %></p>
-    <p><strong>Colaboração: </strong><%= alinhamento.colaboracao %></p>
-    <p><strong>Descrição: </strong><%= alinhamento.descricao %></p>
-    <p><strong>Projeto: </strong><%= alinhamento.project.name %></p>
-    <div style='display: none'>
-       <%= render "alinhamento/referencial_alinhamento", referencial: alinhamento.referencial %>
-    </div>
+  <table style='width: 100%'>
+  <% alinhamentos.each do |alinhamento| %>
+    <tr>
+    <td>
+      <table class='list' style='width: 100%'><tr>
+      <td colspan='2'>
+        <p><strong>Referencial: </strong><%= alinhamento.referencial.identificador %></p>
+      </td>
+      </tr><tr>
+      <td style='width: 50%'>
+        <p><strong>Tipo: </strong><%= alinhamento.tipo %></p>
+      </td>
+      <td style='width: 50%'>
+        <p><strong>Colaboração: </strong><%= alinhamento.colaboracao %></p>
+      </td>
+      </tr><tr>
+      <td colspan='2'>
+        <p><strong>Descrição: </strong><%= alinhamento.descricao %></p>
+      </td>
+      </tr><tr>
+      <td colspan='2'>
+         <div style='float: right'>
+             <div style='padding-left: 10px; float: left;'>
+                <%= link_to "Editar", edit_alinhamento_path(alinhamento), method: :get, class: "icon icon-edit" %>
+             </div>
+             <div style='padding-left: 10px; float: left;'>
+                 <%= link_to "Remover", alinhamento,
+                        method: :delete,
+                        class: "icon icon-del",
+                        data: { confirm: "Tem certeza que deseja remover o alinhamento do projeto com  #{alinhamento.referencial.identificador} ?" } %>
+             </div>
+         </div>
+      </td>
+      </tr></table>
+    </td>
+    </tr>
   <% end %>
+  </table>
+
   </div>

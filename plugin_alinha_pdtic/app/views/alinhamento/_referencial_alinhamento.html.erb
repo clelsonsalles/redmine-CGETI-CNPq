@@ -10,7 +10,7 @@
          <div style='clear: both'></div>
 
          <div style='float: left; width: 98%'>
-                  <div id='modal-incluiAlinhamento-<%= referencial.id %>' class='modal-incluiAlinhamento'  style='display: none' >
+              <div id='modal-incluiAlinhamento-<%= referencial.id %>' class='modal-incluiAlinhamento'  style='display: none' >
                   <% novoAlinhamento = Alinhamento.new %>
                   <%= form_for novoAlinhamento, url: alinhamento_index_path do |a| %>
                       <%= a.hidden_field :id_referencial, :value => referencial.id %>
@@ -27,37 +27,35 @@
                           <%= a.label :descricao %>
                           <%= a.text_field :descricao, class: "form-control" %>
                       </div>
+
                       <div style='padding-left: 10px; float: left;'>
+                         <%= link_to "Cancelar", "#", class: "icon icon-add", onclick: hideIncluiAlinhamento %>
+                      </div>
+                      <div style='padding-left: 10px; float: right;'>
                           <%= a.submit "Criar Alinhamento Tático", class: " icon icon-add float-rig" %>
-                   </div>
-
-                   <div style='clear: both'></div>
-
-               <% end %>
-               </div>
+                      </div>
+                      <div style='clear: both'></div>
+                  <% end %>
+              </div>
          </div>
          <div style='clear: both'></div>
-
       </div>
 
+         <div style='padding-top: 0px'>
+            <div id='accordion_<%= referencial.id %>'>
+               <% Referencial.where(principal_id: referencial.id).find_each do |filho| %>
+                  <h3> <%= filho.identificador %></h3>
+                  <div>
+                     <%= render "alinhamento/referencial_alinhamento", referencial: filho %>
+                  </div>
+              <% end %>
+            </div>
 
-      <div style='padding-top: 0px'>
-         <div id='accordion_<%= referencial.id %>'>
-         <% Referencial.where(principal_id: referencial.id).find_each do |filho| %>
-
-               <h3> <%= filho.identificador %></h3>
-               <div>
-                  <%= render "alinhamento/referencial_alinhamento", referencial: filho %>
-               </div>
-         <% end %>
+        <script>
+          $( function() {
+             $( "#accordion_<%= referencial.id %>" ).accordion({heightStyle: "content"});
+          } );
+        </script>
          </div>
-
-  <script>
-  $( function() {
-    $( "#accordion_<%= referencial.id %>" ).accordion({heightStyle: "content"});
-  } );
-  </script>
-
-      </div>
 
 

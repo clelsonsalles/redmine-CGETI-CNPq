@@ -5,174 +5,132 @@
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
 <% end %>
 
+<% wikiProjeto =  Setting.plugin_cgeti_portifolio['projeto_wiki_inicial'].split(':') %>
+<% wikiProjetoString = "{{include(" + wikiProjeto[0] + ":" + wikiProjeto[1] + ")}}"  %>
+<% wikiProjetoImagemString = "{{include(" + wikiProjeto[0] + ":" + wikiProjeto[2] + ")}}"  %>
 
+<% wikiTiposProjeto =  Setting.plugin_cgeti_portifolio['projeto_wiki_tipos'].split(':') %>
+<% wikiTiposProjetoString = "{{include(" + wikiTiposProjeto[0] + ":" + wikiTiposProjeto[1] + ")}}"  %>
 
-<div style='float: left; width: 44%;'>
 <div>
 
-<div>
-  <%= image_tag('ProjetosPortifolio.png', :plugin => 'plugin_alinha_pdtic', :style => 'width: 90px; height: 90px; float: left;') %>
-  <div style='float: left; min-width: 75%; text-align: center;'>
-    <h2 style='font-size: 2em; color: darkblue'>Portifólio de Projetos de TIC</h2>
-    <h3 style='font-size: 1.5em; color: darkblue'>CGETI/CNPq</h3>
+  <div style='float:left; width: 40%; position: relative; top: -20px'>
+    <div class="wiki wiki-page">
+      <%= textilizable wikiProjetoImagemString %>
+    </div>
   </div>
-</div>
-
-<div style='clear: both; position: relative; left: 35px; top: 10px;'>
-  <div style='float: left;'>
-    <a href='/projects/projetos-sob-gestao-da-tic'>  <%= image_tag('PortifolioProjetos-002.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
-  </div>
-  <div style='float: left;'>
-    <a href='/projects/monitoramento-e-gestao-de-tic'> <%= image_tag('PortifolioProjetos-003.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
-  </div>
-  <div style='float: left;'>
-    <a href='/projects/projetos-em-iniciacao'> <%= image_tag('PortifolioProjetos-004.jpg', :plugin => 'plugin_alinha_pdtic', :style => 'width: 85%; height: 85%;') %> </a>
-  </div>
-  <div style='clear: both;'></div>
-</div>
-
-</div>
-</div>
+  <div style='float:left; width: 60%'>
+    <div class="wiki wiki-page">
+      <%= textilizable wikiProjetoString %>
+    </div>
 
 
-<div style='float: left; width: 55%'>
+    <% if User.current.logged? %>
+    <div style=''>
+    <div style='clear: both;' ></div>
+    <div id="projects-index" class='projects-hierarquia' style='padding-left: 25px'>
 
+    <h3>Projetos Associados ao usuário <b><%= User.current.name %></b>:</h3>
+    <div id="projetos-index" class="collapsed-text box" style='padding-bottom: 45px: max-height: 150px; overflow: auto;'>
+        <% for project in @projects %>
+           <% if(User.current.member_of?(project)) %>
+              <div style='padding: 3px 15px'>
+              <%= link_to_project(project, {}, :class => "icon icon-fav my-project") %>
+              </div>
+           <% end %>
+        <% end %>
+    </div>
+    </div>
+    </div>
 
-   <h2 style='font-size: 2em; color: darkblue; text-align: center'>Portifólio de Projets de TIC -  CGETI/CNPq</h2>
-
-
-	<p>Um <strong>portifólio</strong> é uma coleção de projetos, programas e outros trabalhos, em andamento ou planejados, estando eles relacionados de alguma forma ou não, que estão agrupados com o propósito de facilitar o gerenciamento efetivo das ações para atender aos objetivos estratégicos organizacionais. Enquanto os projetos e programas são temporários, os portifólios são contínuos.</p>
-
-
-	<p>O <strong>Gerenciamento de Portifólios de Projetos</strong> na CGETI refere-se a gestão centralizada de um ou mais portifólios, que inclui identificação, priorização, autorização, monitoramento e controle de projetos, programas e outros trabalhos relaciona</br>
-Considerando os diversos níveis a que o gerenciamento de portifólio pode ser aplicado em uma organização, o <strong>Gerenciamento de Portifólios de Projetos</strong> na CGETI propõe uma classificação sob um olhar departamental, voltado para a área de <strong>Tecnologia da Informação e Comunicações - TIC</strong> do CNPq, sendo assim classificada como um <strong>Portifólio de Projetos Departamental</strong> (segunda a classificação oferecida na "Metologia de Gerenciamento de Portifólio de Projetos do SISP").</p>
-
-
-<blockquote>
-<p>O <strong>Portifólio de Projetos CGETI</strong> foi organizado para apresentar seus componentes (projetos, programas, operações e outras ações ou trabalhos)
-em três perspectivas ou agrupamentos:</p>
-	<ul>
-
-	<li><strong>Projetos de TIC</strong>
-	<ul>
-	<li>agrupa os projetos que estão sendo conduzidos pelo <strong>Processo de Gerenciamento de Projetos</strong> da área de TIC</li>
-	</ul>
-	</li>
-
-	<li><strong>Monitoramento e Gestão</strong>
-	<ul>
-	<li>grupo de projetos, operações ou ações relacionados às atividades de monitoramento, planejamento e gestão de TIC</li>
-	</ul></li>
-
-        <li><strong>Projetos Candidatos</strong>
-        <ul>
-
-<li>apresenta um agrupamento de ações ou projetos que podem ser iniciados ou que são candidatos a se submeterem à <strong>Fase de Iniciação do Processo de Gestão de Projetos</strong></li>       
- 
-        </ul>
-        </li>
-
-	</ul>
-
-</blockquote>
-</div>
-
-<% if User.current.logged? %>
-<div style='float: left; width:39%'>
-<div style='clear: both;' ></div>
-
-<h3>Projetos Associados ao usuario <b><%= User.current.name %></b>:</h3>
-<div id="projetos-index" style='padding-bottom: 45px'>
-    <% for project in @projects %>
-       <% if(User.current.member_of?(project)) %>
-          <div style='padding: 3px 15px'>
-          <%= link_to_project(project, {}, :class => "icon icon-fav my-project") %>
-          </div>
-       <% end %>
     <% end %>
+
+
+  </div>
+  <div style='clear: both'></div>
+
 </div>
-</div>
+
+
+<div style=' '>
+
+    <div class="wiki wiki-page">
+      <%= textilizable wikiTiposProjetoString %>
+    </div>
+
+<% projetosAtivos = Project.where(parent_id: nil) %>
+<% projetosTree = Project.where.not(parent_id: nil).order(parent_id: :asc) %>
+<% h = Hash.new %>
+
+<% project_tree(projetosTree, :init_level => true) do |projetoAtivo, level| %>
+   <% for valorCustomizado in projetoAtivo.custom_field_values %>
+      <% chave = valorCustomizado.custom_field.name %>
+      <% if chave == 'Tipo de Projeto' %>
+         <% for valor in valorCustomizado.value %>
+            <% if h.has_key?(valor) %>
+               <% h[valor] = h[valor] + 1 %>
+            <% else %>
+               <% h[valor] = 1 %>
+            <% end %>
+         <% end %>
+      <% end %>
+   <% end %>
 <% end %>
 
+<% for projetoAtivo in projetosAtivos %>
+   <% for valorCustomizado in projetoAtivo.custom_field_values %>
+      <% chave = valorCustomizado.custom_field.name %>
+      <% if chave == 'Tipo de Projeto' %>
+         <% for valor in valorCustomizado.value %>
+            <% if h.has_key?(valor) %>
+               <% h[valor] = h[valor] + 1 %>
+            <% else %>
+               <% h[valor] = 1 %> 
+            <% end %>
+         <% end %>
+      <% end %>
+   <% end %>
+<% end %>
+
+<div id='graficosTipoProjetos'>
+
+<script type="text/javascript">
+   google.charts.load('current', {packages: ['corechart', 'bar']});
+   google.charts.setOnLoadCallback(drawBasic);
+   function drawBasic() {
+      var data = google.visualization.arrayToDataTable([
+         ['Tipo de Projeto', 'Quantidade']
+        <% h.each do |key, value| %>
+         ,['<%= key %>', <%= value %>]
+        <% end %>
+      ]);
+
+      var options = {
+        title: 'Quantidade de Projetos por Tipo de Projeto',
+        legend: 'none',
+        width: 1500,
+        height: 500,
+        hAxis: {
+          title: 'Tipos de Projetos'
+        },
+        vAxis: {
+          title: 'Quantidade de Projetos'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+         document.getElementById('graficosTipoProjetos'));
+
+      chart.draw(data, options);
+   }
+
+</script>
+</div>
+
+</div>
+
 <div style='clear: both;' ></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<div>
-<h2>Lista de Projetos do Portif&#x00F3;lio de Projetos CGETI/CNPq</h2>
-
-
-<div id="accordion">
-  <h3>Projetos de TIC</h3>
-  <div>
-    <% proj = Project.find("projetos-sob-gestao-da-tic") %>
-    <%= proj.description %>
-    <div id="projects-index">
-    <% parents = proj.descendants  %>
-    <% for proInterno in parents %>
-       <% if(proInterno.parent_id == proj.id) %>
-          <%= render_project_hierarchy(proInterno.hierarchy) %>
-       <% end %>
-    <% end %>
-    </div>
-  </div>
-
-  <h3>Monitoramento e Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
-  <div>
-    <% proj = Project.find("monitoramento-e-gestao-de-tic") %>
-    <%= proj.description %>
-    <div id="projects-index">
-    <% parents = proj.descendants  %>
-    <% for proInterno in parents %>
-       <% if(proInterno.parent_id == proj.id) %>
-          <%= render_project_hierarchy(proInterno.hierarchy) %>
-       <% end %>
-    <% end %>
-    </div>
-  </div>
-
-  <h3>Projetos Candidatos - em Inicia&#x00E7;&#x00E3;o </h3>
-  <div>
-    <% proj = Project.find("projetos-em-iniciacao") %>
-    <%= proj.description %>
-    <div id="projects-index">
-    <% parents = proj.descendants  %>
-    <% for proInterno in parents %>
-       <% if(proInterno.parent_id == proj.id) %>
-          <%= render_project_hierarchy(proInterno.hierarchy) %>
-       <% end %>
-    <% end %>
-    </div>
-  </div>
-
-</div>
-
-
-</div>
--->
 
 <% if User.current.logged? %>
 <p style="text-align:right;">

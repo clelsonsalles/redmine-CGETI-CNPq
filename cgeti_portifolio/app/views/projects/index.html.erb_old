@@ -1,0 +1,134 @@
+# encoding: utf-8
+
+
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+
+
+<div>
+  <% projetoWiki = Project.find( Setting['plugin_cgeti_portifolio']['projeto_wiki_inicial']) %>
+  <div class="wiki wiki-page">
+
+ <%= textilizable "{{include(projetoWiki.wiki.pages[0])}}" %>
+
+<%=begin %>
+<%= WikiHelper.wiki_page_breadcrumb(projetoWiki.wiki.pages[0]) %>
+     <%= textilizable projetoWiki.wiki.pages[0].content.text %>
+<%=end %>
+
+  </div>
+
+</div>
+
+<% if User.current.logged? %>
+<div style='float: left; width:39%'>
+<div style='clear: both;' ></div>
+
+<h3>Projetos Associados ao usuario <b><%= User.current.name %></b>:</h3>
+<div id="projetos-index" style='padding-bottom: 45px'>
+    <% for project in @projects %>
+       <% if(User.current.member_of?(project)) %>
+          <div style='padding: 3px 15px'>
+          <%= link_to_project(project, {}, :class => "icon icon-fav my-project") %>
+          </div>
+       <% end %>
+    <% end %>
+</div>
+</div>
+<% end %>
+
+<div style='clear: both;' ></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<div>
+<h2>Lista de Projetos do Portif&#x00F3;lio de Projetos CGETI/CNPq</h2>
+
+
+<div id="accordion">
+  <h3>Projetos de TIC</h3>
+  <div>
+    <% proj = Project.find("projetos-sob-gestao-da-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+  <h3>Monitoramento e Gest&#x00E3;o da &#x00C1;rea de TIC</h3>
+  <div>
+    <% proj = Project.find("monitoramento-e-gestao-de-tic") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+  <h3>Projetos Candidatos - em Inicia&#x00E7;&#x00E3;o </h3>
+  <div>
+    <% proj = Project.find("projetos-em-iniciacao") %>
+    <%= proj.description %>
+    <div id="projects-index">
+    <% parents = proj.descendants  %>
+    <% for proInterno in parents %>
+       <% if(proInterno.parent_id == proj.id) %>
+          <%= render_project_hierarchy(proInterno.hierarchy) %>
+       <% end %>
+    <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+</div>
+-->
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+<span class="icon icon-fav my-project"><%= l(:label_my_projects) %></span>
+</p>
+<% end %>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>
+
+

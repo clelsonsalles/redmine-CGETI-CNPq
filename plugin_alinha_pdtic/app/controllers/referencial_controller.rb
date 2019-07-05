@@ -1,20 +1,27 @@
 class ReferencialController < ApplicationController
   def index
-    ref = Referencial.find(3)
-    ref.principal = nil
-    ref.save
-
-    ref = Referencial.find(4)
-    ref.principal = nil
-    ref.save
-
-    ref = Referencial.find(5)
-    ref.principal = nil
-    ref.save
-
-
     @referencias = Referencial.where(principal: nil)
+
+    @chartReferencial = Hash.new
+    @referencias.each_with_index do |referencial, index|
+       @chartReferencial[referencial.identificador] = calculaQuantidadeAlinhamentos(referencial)
+    end 
   end
+
+  def calculaQuantidadeAlinhamentos(referencial)
+     quantidade = 0
+     if referencial.alinhamentos.any?
+          quantidade += referencial.alinhamentos.length
+     end
+
+     filhosReferencial = referencial.filhos
+     filhosReferencial.each_with_index do |filho, index|
+        quantidade += calculaQuantidadeAlinhamentos(filho)
+     end
+
+     quantidade
+  end
+
 
   def edit
     @referencial = Referencial.find(params[:id])

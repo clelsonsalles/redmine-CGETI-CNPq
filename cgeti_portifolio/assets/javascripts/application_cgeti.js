@@ -4,6 +4,24 @@
 // funcao da CGETI para tratar a arvore de projetos sem exibir as descricoes
   $( function() {
     $( "#accordion" ).accordion();
+
+    var dialogCGTI;
+
+    dialogCGETI = $( "#modal-CGETI" ).dialog({
+      autoOpen: false,
+      height: "auto",
+      width: "auto",
+      modal: true
+    });
+
+    $( "#fechar-modal-CGETI" ).button().on( "click", function() {
+      dialogCGETI.dialog( "close" );
+    });
+    $( "#abrir-modal-CGETI" ).button().on( "click", function() {
+      dialogCGETI.dialog( "open" );
+    });
+
+
   } );
 
 function alterarExibicao(id){
@@ -26,24 +44,6 @@ $(document).ready(function(){
   $( ".controller-projects .collapsed-text").css("max-height", "150px");
   $( ".controller-projects .collapsed-text").css("overflow", "auto");
 
-
-/*
-  $( "article.news-article").addClass("box");
-  $( "article.news-article").css("padding-left", "10px");
-  $( "article.news-article").css("height", "150px", "important");
-  $( "article.news-article").css("overflow", "auto");
-  $( "article.news-article").css("margin", "20px");
-  $( "article.news-article").css("float", "left");
-  $( "article.news-article").css("max-width", "45%");
-
-  $( "span.pagination").css("clear", "both");
-
-*/
-
-
-
-
-
   $( "#projects-index ul.root li.root").css("font-size", "0.9em");
   $( "#projects-index ul.root li.root").css("float", "left");
   $( "#projects-index ul.root li.root").css("padding", "3px 3px ");
@@ -64,10 +64,5 @@ $(document).ready(function(){
 
   $( "#projects-index").next().css("clear", "both");
 
-
-
-
 });
-
- 
 

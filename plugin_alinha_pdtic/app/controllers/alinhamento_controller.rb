@@ -16,8 +16,12 @@ class AlinhamentoController < ApplicationController
 
   def destroy
     id = params[:id]
+    alinhamento = Alinhamento.find(params[:id])
+    projeto = alinhamento.project
+
     Alinhamento.destroy id
-    redirect_to alinhamentos_url
+    redirect_to project_path(projeto)
+
   end
 
   def new
@@ -34,7 +38,7 @@ class AlinhamentoController < ApplicationController
     alinhamento.project = projeto
     alinhamento.save()
 
-    redirect_to alinhamentos_url
+    redirect_to project_path(projeto)
   end
 
 end
