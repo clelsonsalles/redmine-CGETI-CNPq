@@ -8,14 +8,5 @@ Redmine::Plugin.register :plugin_alinha_pdtic do
   version '0.1'
   requires_redmine :version_or_higher => '2.0.0'
 
-  menu :top_menu, :pdtic, { :controller => 'referencial', :action => 'index' }, :caption => 'PDTIC', :after => :my_page
-
-  project_module :alinhamento_PDTIC do
-     permission :gerenciar_alinhamento_PDTIC, {
-        :alinhamento => [:new, :create, :destroy, :edit, :update]
-     }
-  end
 
 end
-
-require_dependency 'plugin_alinha_pdtic/hooks'
