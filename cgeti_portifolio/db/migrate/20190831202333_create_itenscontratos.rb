@@ -1,6 +1,6 @@
-class CreateItenscontratos < ActiveRecord::Migration
+class CreateItemcontratos < ActiveRecord::Migration
   def change
-    create_table :itenscontratos do |t|
+    create_table :itemcontratos do |t|
       t.string :item
       t.string :unidade
       t.text :observacoes
