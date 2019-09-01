@@ -6,6 +6,7 @@ class CreateGarantias < ActiveRecord::Migration
       t.string :prazo
       t.string :tipo
       t.text :observacoes
+      t.decimal :valor
 
       t.references :contrato, foreign_key: true
     end
